@@ -1,18 +1,68 @@
-<div class="pokemon-details" *ngIf="pokemon">
-    <img [src]="pokemon.sprites.front_default" [alt]="pokemon.name" />
-    <h2>{{ pokemon.name | uppercase}}</h2>
-    <p>#{{ pokemon.id }}</p>
-  
-    <h3>Types:</h3>
-    <div *ngFor="let type of pokemon.types">
-      <span class="type-badge">{{ type.type.name }}</span>
+<div class="container mt-5">
+  <div class="card p-4 shadow-lg mx-auto">
+    <div class="row g-5">
+      <div class="col-md-6 text-center">
+        <img [src]="pokemonSprite" class="img-3" style="max-height: 300px" />
+
+        <h4 class="fw-bold mt-2">{{ pokemon?.name | titlecase }}</h4>
+        <p class="text-muted fw-bold">N° {{ pokemon?.id }}</p>
+
+        <!-- Pokédex Entry -->
+        <p class="small text-center">
+          {{ description }}
+        </p>
+
+        <!-- Pokémon Type Badges -->
+        <div class="d-flex gap-2 flex-wrap justify-content-center">
+          <span
+            *ngFor="let type of pokemonTypes"
+            class="badge px-3 py-2"
+            [ngClass]="getTypeClass(type)"
+          >
+            {{ type | titlecase }}
+          </span>
+        </div>
+      </div>
+      <div class="col-md-6 d-flex flex-column justify-content-start gap-5">
+        <!-- Abilities -->
+        <div>
+          <h6 class="fw-bold text-center">Abilities</h6>
+          <div class="d-flex justify-content-center gap-2">
+            <button class="btn btn-outline-primary px-3">Torrent</button>
+            <button class="btn btn-outline-danger px-3">
+              Defiant <i class="bi bi-eye-slash"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Height, Weight, Weaknesses, Base Exp -->
+        <div class="row text-center mt-3">
+          <div class="col-6">
+            <h6 class="fw-bold">Height</h6>
+            <p class="badge bg-light text-dark px-3 py-2">1.7m</p>
+          </div>
+          <div class="col-6">
+            <h6 class="fw-bold">Weight</h6>
+            <p class="badge bg-light text-dark px-3 py-2">84.5Kg</p>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <h6 class="fw-bold text-center mt-4">Stats</h6>
+        <div class="d-flex justify-content-center flex-wrap gap-2">
+          <span class="badge bg-danger px-3"
+            >HP {{ pokemon?.stats[0].base_stat }}</span
+          >
+          <span class="badge bg-warning px-3">ATK 86</span>
+          <span class="badge bg-primary px-3">DEF 88</span>
+          <span class="badge bg-success px-3">SpA 111</span>
+          <span class="badge bg-info px-3">SpD 101</span>
+          <span class="badge bg-secondary px-3">SPD 60</span>
+          <span class="badge bg-dark px-3">TOT 530</span>
+        </div>
+      </div>
+      <!-- End Row -->
     </div>
-  
-    <h3>Base Stats:</h3>
-    <ul>
-      <li *ngFor="let stat of pokemon.stats">
-        {{ stat.stat.name }}: {{ stat.base_stat }}
-      </li>
-    </ul>
+    <!-- End Card -->
   </div>
-  
+</div>
