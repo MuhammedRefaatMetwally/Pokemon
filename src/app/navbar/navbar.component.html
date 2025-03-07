@@ -1,0 +1,17 @@
+<nav class="navbar">
+    <ul class="nav-links">
+      <li class="nav-item" routerLink="" [class.active]="activeTab === 'home'" (click)="setActive('home')">
+        <img src="pokemon.png" alt="Home" />
+        <span>Home</span>
+      </li>
+      <li class="nav-item" routerLink="cart" [class.active]="activeTab === 'cart'" (click)="setActive('cart')">
+        <img src="pokeball.png" alt="Cart" />
+        <span>Cart</span>
+      </li>
+      <li class="nav-item" routerLink="about" [class.active]="activeTab === 'about'" (click)="setActive('about')">
+        <img src="heart.png" alt="About" />
+        <span>About</span>
+      </li>
+    </ul>
+  </nav>
+  

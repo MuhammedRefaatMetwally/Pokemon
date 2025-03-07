@@ -1,0 +1,22 @@
+<div
+  class="pokemon-card text-center shadow-sm"
+  (click)="goToDetails(pokemonId)"
+>
+  <img
+    *ngIf="pokemonImage"
+    [src]="pokemonImage"
+    class="pokemon-img"
+    [alt]="pokemon?.name"
+  />
+  <p class="pokemon-number">N°{{ pokemonId }}</p>
+  <h5 class="pokemon-name">{{ pokemon?.name }}</h5>
+  <div class="types">
+    <span
+      *ngFor="let type of pokemonTypes"
+      class="badge"
+      [ngClass]="getTypeClass(type)"
+    >
+      {{ type }}
+    </span>
+  </div>
+</div>
