@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PokemonService } from '../../services/pokemon.service';
 import { CommonModule, TitleCasePipe } from '@angular/common';
+import { CartService } from '../../services/cart.service';
 @Component({
   selector: 'app-pokemon-details',
   imports: [CommonModule, TitleCasePipe],
@@ -14,6 +15,7 @@ export class PokemonDetailsComponent implements OnInit {
   pokemonTypes: string[] = [];
   species: any;
   description: string = '';
+  pokemonCards: any[] = [];
   getTypeClass(type: string) {
     const typeColors: { [key: string]: string } = {
       fire: 'bg-danger text-white',
@@ -40,8 +42,23 @@ export class PokemonDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private pokemonService: PokemonService
+    private pokemonService: PokemonService,
+    private cartService: CartService
   ) {}
+
+  addToCart(card: any) {
+    const {
+      images: { small: mainImage },
+      name,
+      cardmarket: {
+        prices: { averageSellPrice },
+      },
+      set: { name: setName },
+      id,
+    } = card;
+    const newCard = { mainImage, name, averageSellPrice, setName, id };
+    this.cartService.addToCart(newCard);
+  }
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
@@ -49,6 +66,7 @@ export class PokemonDetailsComponent implements OnInit {
       this.pokemonService.getPokemonById(+id).subscribe({
         next: (data: any) => {
           this.pokemon = data.pokemon;
+          console.log(this.pokemon);
           this.species = data.species;
           this.pokemonSprite =
             this.pokemon.sprites.other['official-artwork'].front_default;
@@ -57,7 +75,17 @@ export class PokemonDetailsComponent implements OnInit {
           this.description = this.species['flavor_text_entries'][1][
             'flavor_text'
           ].replace(/[\n\f]/g, ' ');
-          console.log(this.species);
+
+          this.pokemonService
+            .getPokemonCardsByName(this.pokemon?.name)
+            .subscribe({
+              next: (response: any) => {
+                this.pokemonCards = response.data; // Store the fetched cards
+              },
+              error: (err) => {
+                console.error('Error fetching Pokémon cards:', err);
+              },
+            });
         },
       });
     }

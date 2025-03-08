@@ -28,9 +28,12 @@
         <div>
           <h6 class="fw-bold text-center">Abilities</h6>
           <div class="d-flex justify-content-center gap-2">
-            <button class="btn btn-outline-primary px-3">Torrent</button>
+            <button class="btn btn-outline-primary px-3">
+              {{ pokemon?.abilities[0]?.ability.name | titlecase }}
+            </button>
             <button class="btn btn-outline-danger px-3">
-              Defiant <i class="bi bi-eye-slash"></i>
+              {{ pokemon?.abilities[1]?.ability.name | titlecase }}
+              <i class="bi bi-eye-slash"></i>
             </button>
           </div>
         </div>
@@ -39,11 +42,15 @@
         <div class="row text-center mt-3">
           <div class="col-6">
             <h6 class="fw-bold">Height</h6>
-            <p class="badge bg-light text-dark px-3 py-2">1.7m</p>
+            <p class="badge bg-light text-dark px-3 py-2">
+              {{ pokemon?.height / 10 }}m
+            </p>
           </div>
           <div class="col-6">
             <h6 class="fw-bold">Weight</h6>
-            <p class="badge bg-light text-dark px-3 py-2">84.5Kg</p>
+            <p class="badge bg-light text-dark px-3 py-2">
+              {{ pokemon?.weight / 10 }}Kg
+            </p>
           </div>
         </div>
 
@@ -53,16 +60,45 @@
           <span class="badge bg-danger px-3"
             >HP {{ pokemon?.stats[0].base_stat }}</span
           >
-          <span class="badge bg-warning px-3">ATK 86</span>
-          <span class="badge bg-primary px-3">DEF 88</span>
-          <span class="badge bg-success px-3">SpA 111</span>
-          <span class="badge bg-info px-3">SpD 101</span>
-          <span class="badge bg-secondary px-3">SPD 60</span>
-          <span class="badge bg-dark px-3">TOT 530</span>
+          <span class="badge bg-warning px-3"
+            >ATK {{ pokemon?.stats[1].base_stat }}</span
+          >
+          <span class="badge bg-primary px-3"
+            >DEF {{ pokemon?.stats[2].base_stat }}</span
+          >
+          <span class="badge bg-success px-3"
+            >SpA {{ pokemon?.stats[3].base_stat }}</span
+          >
+          <span class="badge bg-info px-3"
+            >SpD {{ pokemon?.stats[4].base_stat }}</span
+          >
+          <span class="badge bg-secondary px-3"
+            >SPD {{ pokemon?.stats[5].base_stat }}</span
+          >
         </div>
       </div>
       <!-- End Row -->
     </div>
     <!-- End Card -->
+  </div>
+</div>
+<div class="d-flex flex-column justify-content-center">
+  <h2 class="mt-5 text-center mb-5">{{ pokemon?.name | titlecase }} Cards</h2>
+  <div class="row">
+    <div *ngFor="let card of pokemonCards" class="col-md-6 col-lg-3 mb-4">
+      <div class="card">
+        <img [src]="card.images.small" class="card-img-top" />
+        <div class="card-body text-center">
+          <h5 class="card-title">{{ card.name | titlecase }}</h5>
+          <p class="card-text text-muted">{{ card.set.name }}</p>
+          <p class="card-text fw-bold">
+            ${{ card.cardmarket.prices.averageSellPrice }}
+          </p>
+          <button (click)="addToCart(card)" class="btn btn-primary">
+            Add to cart
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
