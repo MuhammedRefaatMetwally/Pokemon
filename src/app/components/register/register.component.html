@@ -1,0 +1,70 @@
+<section class="container d-flex justify-content-center align-items-center min-vh-75" style="background: url('https://wallpapercave.com/wp/wp2757448.jpg') no-repeat center center/cover;">
+  <div class="card p-5 shadow-lg border-0" style="width: 600px; background: linear-gradient(135deg, #ffcc00, #ff0000); border-radius: 20px; border: 5px solid white; text-align: center;">
+    <h1 class="text-center text-white mb-4" style="font-family: 'Press Start 2P', cursive; text-shadow: 2px 2px 5px black;">
+      Pokémon Register
+    </h1>
+    <form [formGroup]="registerForm">
+      <div class="form-group mb-3">
+        <label for="name" class="fw-bold text-white">Name:</label>
+        <input formControlName="name" type="text" class="form-control" id="name" style="border-radius: 10px;"/>
+        <div>
+          @if(!name.valid&&name.touched){
+            <p style="color: #ffeb3b;">Name is required and must be between 3 to 20 characters.</p>
+        }
+      </div>     
+     </div>
+      <div class="form-group mb-3">
+        <label for="email" class="fw-bold text-white">Email:</label>
+        <input formControlName="email" type="email" class="form-control" id="email" style="border-radius: 10px;"/>
+        <div>
+          @if(!email.valid&&email.touched){
+            <p style="color: #ffeb3b;">Please enter a valid email address.</p>
+        }
+      </div>      </div>
+      <div class="form-group mb-3">
+        <label for="password" class="fw-bold text-white">Password:</label>
+        <input formControlName="password" type="password" class="form-control" id="password" style="border-radius: 10px;"/>
+        <div>
+          @if(!password.valid&&password.touched){
+            <p style="color: #ffeb3b;">Password is required and must be at least 6 characters long.</p>
+        }
+      </div>      </div>
+      <div class="form-group mb-3">
+        <label for="rePassword" class="fw-bold text-white">Confirm Password:</label>
+        <input formControlName="rePassword" type="password" class="form-control" id="rePassword" style="border-radius: 10px;"/>
+         <div>
+        @if(!rePassword.valid&&rePassword.touched){
+          <p style="color: #ffeb3b;">Passwords must match.</p>
+      }
+    </div>   
+     </div>
+      <label class="fw-bold text-white">Gender:</label>
+      <div class="d-flex gap-3 justify-content-center">
+        <div class="form-check">
+          <input type="radio" id="male" class="form-check-input" formControlName="gender" value="Male" />
+          <label for="male" class="form-check-label text-white">Male</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" id="female" class="form-check-input" formControlName="gender" value="Female" />
+          <label for="female" class="form-check-label text-white">Female</label>
+        </div>
+      </div>
+      <div class="text-center mt-4">
+        <button [disabled]="registerForm.invalid" class="btn" (click)="registerUser()" style="background: white; border-radius: 50%; width: 80px; height: 80px; position: relative;">
+          <div style="background: red; height: 40px; border-top-left-radius: 40px; border-top-right-radius: 40px;"></div>
+          <div style="background: black; height: 10px;"></div>
+          <div style="background: white; height: 30px; border-bottom-left-radius: 40px; border-bottom-right-radius: 40px;"></div>
+          <div style="position: absolute; top: 30px; left: 30px; width: 20px; height: 20px; background: white; border-radius: 50%; border: 3px solid black;"></div>
+        </button>
+      </div>
+      <div *ngIf="errorMsg" class="text-center mt-3" style="color:#ffeb3b">
+        {{ errorMsg }}
+      </div>
+      <p class="text-white mt-3">Already have an account? <a class="text-warning" routerLink="/login">Login</a></p>
+    </form>
+  </div>
+</section>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+</style>

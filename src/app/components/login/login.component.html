@@ -1,0 +1,43 @@
+<section class="container d-flex justify-content-center align-items-center min-vh-100" style="background: url('https://wallpapercave.com/wp/wp2757448.jpg') no-repeat center center/cover;">
+  <div class="card p-5 shadow-lg border-0" style="width: 600px; background: linear-gradient(135deg, #ffcc00, #ff0000); border-radius: 20px; border: 5px solid white; text-align: center;">
+    <h1 class="text-center text-white mb-4" style="font-family: 'Press Start 2P', cursive; text-shadow: 2px 2px 5px black;">
+      Pokémon Login
+    </h1>
+    <form [formGroup]="login">
+      <div class="form-group mb-3">
+        <label for="email" class="fw-bold text-white">Email:</label>
+        <input formControlName="email" type="email" class="form-control" id="email" style="border-radius: 10px;"/>
+        <div>
+        @if(!email.valid&&email.touched){
+          <p style="color: #ffeb3b;">Email is Required.</p>
+      }
+    </div>
+
+      </div>
+      <div class="form-group mb-3">
+        <label for="password" class="fw-bold text-white">Password:</label>
+        <input formControlName="password" type="password" class="form-control" id="password" style="border-radius: 10px;"/>
+       <div>
+        @if(!password.valid&&password.touched){
+          <p style="color: #ffeb3b;">Password is Required.</p>
+      }      </div>
+    </div>
+      <div class="text-center mt-4">
+        <button [disabled]="login.invalid" class="btn" (click)="loginUser()" style="background: white; border-radius: 50%; width: 80px; height: 80px; position: relative;">
+          <div style="background: red; height: 40px; border-top-left-radius: 40px; border-top-right-radius: 40px;"></div>
+          <div style="background: black; height: 10px;"></div>
+          <div style="background: white; height: 30px; border-bottom-left-radius: 40px; border-bottom-right-radius: 40px;"></div>
+          <div style="position: absolute; top: 30px; left: 30px; width: 20px; height: 20px; background: white; border-radius: 50%; border: 3px solid black;"></div>
+        </button>
+      </div>
+      <div *ngIf="errorMsg" class=" text-center mt-3" style="color:#ffeb3b">
+        {{ errorMsg }}
+      </div>
+    </form>
+  </div>
+</section>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+</style>
+  
