@@ -51,12 +51,13 @@ export class PokemonDetailsComponent implements OnInit {
       images: { small: mainImage },
       name,
       cardmarket: {
-        prices: { averageSellPrice },
+        prices: { averageSellPrice:price },
       },
       set: { name: setName },
       id,
     } = card;
-    const newCard = { mainImage, name, averageSellPrice, setName, id };
+    console.log(card);
+    const newCard = { mainImage, name, price, setName, id };
     this.cartService.addToCart(newCard);
   }
 
