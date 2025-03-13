@@ -88,6 +88,8 @@ export class PokemonCartComponent implements OnInit, OnDestroy {
       cart: this.cartItems2,
       totalItems: this.totalItems,
       total: this.total,
+      status: 'Placed',
+      date: new Date(),
     });
     localStorage.setItem('loggedInUser', JSON.stringify(user));
     this.clearCart();
