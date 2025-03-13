@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
 
   getGenderImage(): string {
     return this.currentUser.gender === 'Male'
-      ? 'assets/male.jpg'
-      : 'assets/female.jpg';
+      ? 'male.jpg'
+      : 'female.jpg';
   }
 }
