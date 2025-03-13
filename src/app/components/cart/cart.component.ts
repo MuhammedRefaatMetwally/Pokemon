@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CartService } from '../../services/cart.service';
+import { RouterModule } from '@angular/router';
 
 interface CartItem {
   id: number;
@@ -14,13 +15,12 @@ interface CartItem {
 
 @Component({
   selector: 'app-pokemon-cart',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss']
+  styleUrls: ['./cart.component.scss'],
 })
-export class PokemonCartComponent implements OnInit , OnDestroy{
-   cartItems2 : any=[]
-  
+export class PokemonCartComponent implements OnInit, OnDestroy {
+  cartItems2: any = [];
 
   totalItems: number = 0;
   subtotal: number = 0;
@@ -28,23 +28,25 @@ export class PokemonCartComponent implements OnInit , OnDestroy{
   tax: number = 0;
   total: number = 0;
 
-  
-
-   constructor(
-     private cartService: CartService
-   ) {}
+  constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
-    this.cartItems2= this.cartService.getCart()
+    this.cartItems2 = this.cartService.getCart();
     this.calculateCartTotals();
-  
+
     console.log(this.cartItems2);
   }
 
   calculateCartTotals(): void {
-    this.totalItems = this.cartItems2.reduce((sum:any, item:any) => sum + item.quantity, 0);
-    this.subtotal = this.cartItems2.reduce((sum:any, item:any) => sum + (item.price * item.quantity), 0);
-    this.tax = this.subtotal * 0.08; 
+    this.totalItems = this.cartItems2.reduce(
+      (sum: any, item: any) => sum + item.quantity,
+      0
+    );
+    this.subtotal = this.cartItems2.reduce(
+      (sum: any, item: any) => sum + item.price * item.quantity,
+      0
+    );
+    this.tax = this.subtotal * 0.14;
     this.total = this.subtotal + this.shipping + this.tax;
   }
 
@@ -74,6 +76,20 @@ export class PokemonCartComponent implements OnInit , OnDestroy{
     localStorage.setItem('cart', JSON.stringify(this.cartItems2));
   }
 
-  
- 
+  checkout(): void {
+    // Handle checkout logic here
+    console.log('Checkout successful!');
+
+    const currentLoggedInUser = localStorage.getItem('loggedInUser');
+    //get this users orders from localstorage and then add an order with the current cart values and totals
+    let user = JSON.parse(localStorage.getItem('loggedInUser') || '[]');
+    console.log(user);
+    user.orders.push({
+      cart: this.cartItems2,
+      totalItems: this.totalItems,
+      total: this.total,
+    });
+    localStorage.setItem('loggedInUser', JSON.stringify(user));
+    this.clearCart();
+  }
 }
