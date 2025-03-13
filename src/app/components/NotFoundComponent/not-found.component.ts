@@ -9,6 +9,6 @@ export class NotFoundComponent {
   constructor(private router: Router) {}
 
   goHome(): void {
-    this.router.navigate(['/']);
+    this.router.navigate(['pokemon']);
   }
 }

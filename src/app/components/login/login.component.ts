@@ -32,7 +32,7 @@ export class LoginComponent {
     const userExists = users.find((user: any) => user.email === enteredEmail && user.password === enteredPassword);
     if (userExists) {
       localStorage.setItem('loggedInUser', JSON.stringify(userExists));
-      this._Router.navigate(['/home']);
+      this._Router.navigate(['/pokemon']);
     } else {
 
       this.errorMsg = 'Incorrect email or password.';
