@@ -9,6 +9,7 @@ import { LoginComponent } from './components/login/login.component';
 import { NotFoundComponent } from './components/NotFoundComponent/not-found.component';
 import { AuthLayOutComponent } from './layout/auth-lay-out/auth-lay-out.component';
 import { HomeLayOutComponent } from './layout/home-lay-out/home-lay-out.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 export const routes: Routes = [
   {path:"", component:AuthLayOutComponent,children:[
@@ -20,7 +21,9 @@ export const routes: Routes = [
     { path: 'pokemon', component: HomeComponent, pathMatch: 'full' },
     { path: 'cart', component: PokemonCartComponent },
     { path: 'about', component: AboutComponent },
-    { path: 'pokemon/:id', component: PokemonDetailsComponent } // Dynamic route
+    { path: 'pokemon/:id', component: PokemonDetailsComponent },
+    { path: 'profile', component: ProfileComponent }
+// Dynamic route
   ]},
   { path: '**', component:NotFoundComponent }
  
