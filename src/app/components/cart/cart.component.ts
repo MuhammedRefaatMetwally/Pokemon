@@ -76,22 +76,36 @@ export class PokemonCartComponent implements OnInit, OnDestroy {
     localStorage.setItem('cart', JSON.stringify(this.cartItems2));
   }
 
-  checkout(): void {
-    // Handle checkout logic here
-    console.log('Checkout successful!');
+ checkout(): void {
+     let currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
 
-    const currentLoggedInUser = localStorage.getItem('loggedInUser');
-    //get this users orders from localstorage and then add an order with the current cart values and totals
-    let user = JSON.parse(localStorage.getItem('loggedInUser') || '[]');
-    console.log(user);
-    user.orders.push({
+    if (!currentUser) {
+      alert('Please log in to complete the purchase.');
+      return;
+    }
+
+     let newOrder = {
       cart: this.cartItems2,
       totalItems: this.totalItems,
       total: this.total,
       status: 'Placed',
       date: new Date(),
-    });
-    localStorage.setItem('loggedInUser', JSON.stringify(user));
-    this.clearCart();
+    };
+
+     if (!currentUser.orders) {
+      currentUser.orders = [];
+    }
+
+     currentUser.orders.push(newOrder);
+
+     localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
+     let users = JSON.parse(localStorage.getItem('users') || '[]');
+    let updatedUsers = users.map((user: any) =>
+      user.email === currentUser.email ? currentUser : user
+    );
+    localStorage.setItem('users', JSON.stringify(updatedUsers));
+
+     this.clearCart();
   }
 }
