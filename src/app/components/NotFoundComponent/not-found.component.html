@@ -1,0 +1,63 @@
+<div class="pokemon-not-found">
+  <h2 class="text-center fw-bold text-warning pokemon-title">
+    404 - Pokémon Not Found!
+  </h2>
+
+  <div class="text-center mt-4">
+    <img
+      src="/assets/notFound.png"
+      alt="Sad Pikachu"
+      class="pikachu-img"
+    />
+    <p class="text-white mt-3">
+      Oops! The page you're looking for is lost in the Pokémon world.
+    </p>
+    <a routerLink="/" class="btn btn-danger pokemon-btn">Go Home</a>
+  </div>
+</div>
+
+<style>
+   .pokemon-not-found {
+    background: linear-gradient(to bottom, #0075be, #ffcc00);
+    min-height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 50px;
+  }
+
+  .pokemon-title {
+    font-family: "Pokemon Solid", sans-serif;
+    text-shadow: 3px 3px 5px black;
+  }
+
+  .pikachu-img {
+    width: 200px;
+    animation: shake 1s infinite alternate;
+  }
+
+  @keyframes shake {
+    from {
+      transform: translateX(-5px);
+    }
+    to {
+      transform: translateX(5px);
+    }
+  }
+
+  .pokemon-btn {
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-shadow: 2px 2px 5px black;
+    transition: 0.3s;
+  }
+
+  .pokemon-btn:hover {
+    background-color: yellow;
+    color: black;
+  }
+</style>
