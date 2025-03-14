@@ -6,30 +6,31 @@
       <p class="trainer-email">{{ currentUser.email }}</p>
     </div>
   </div>
-  <div class="row">
+ <div class="row">
     <div *ngIf="currentUser?.orders?.length > 0; else noOrders">
       <h2>Your Orders</h2>
       <div *ngFor="let order of currentUser.orders">
         <div class="order-card">
           <h3>Order Date: {{ order.date | date : "short" }}</h3>
-          <p>Status: {{ order.status }}</p>
-          <p>Total Items: {{ order.totalItems }}</p>
-          <p>Total Price: ${{ order.total }}</p>
+          <p><strong>Status:</strong> {{ order.status }}</p>
+          <p><strong>Total Items:</strong> {{ order.totalItems }}</p>
+          <p><strong>Total Price:</strong> ${{ order.total.toFixed(2) }}</p>
           <h4>Pokémon in this order:</h4>
           <ul>
             <li *ngFor="let item of order.cart">
-              {{ item.name }} - ${{ item.price }} x {{ item.quantity }}
+              {{ item.name }} - ${{ item.price.toFixed(2) }} x {{ item.quantity }}
             </li>
           </ul>
         </div>
       </div>
     </div>
-    <ng-template #noOrders>
-      <div class="empty-orders">
-        <img src="sad-poke.png" alt="No Orders" class="no-orders-img" />
+
+     <ng-template #noOrders>
+      <div class="empty-orders text-center">
+        <img src="/assets/sad-poke.png" alt="No Orders" class="no-orders-img" />
         <h2>No Orders Yet</h2>
         <p>You haven't placed any orders yet. Start shopping now!</p>
-        <button class="shop-btn" routerLink="pokemon" type="button">
+        <button class="shop-btn" routerLink="/pokemon" type="button">
           Start Shopping
         </button>
       </div>
