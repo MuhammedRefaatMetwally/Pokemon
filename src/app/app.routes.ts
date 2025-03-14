@@ -7,8 +7,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthLayOutComponent } from './layout/auth-lay-out/auth-lay-out.component';
 import { HomeLayOutComponent } from './layout/home-lay-out/home-lay-out.component';
-import { ProfileComponent } from './components/profile/profile.component';
 import { NotFoundComponent } from './components/NotFoundComponent/not-found.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 export const routes: Routes = [
   {path:"", component:AuthLayOutComponent,children:[

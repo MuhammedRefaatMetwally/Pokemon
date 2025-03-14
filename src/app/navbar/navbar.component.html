@@ -33,16 +33,17 @@
   [class.active]="activeTab === 'profile'"
   (click)="setActive('profile')"
 >
-<img src="https://cdn-icons-png.flaticon.com/512/188/188987.png" alt="Profile" width="24" height="24" />
+<img src="profile.png" alt="Profile" width="24" height="24" />
   <span>Profile</span>
 </li>
 <li
   class="nav-item"
-  routerLink="signout"
+  (click)="signOut()"
+  routerLink="login"
   [class.active]="activeTab === 'signout'"
   (click)="setActive('signout')"
 >
-<img src="https://cdn-icons-png.flaticon.com/512/188/188990.png" alt="Profile" width="24" height="24" />
+<img src="signOut.png" alt="Profile" width="24" height="24" />
   <span>Sign Out</span>
 </li>
   </ul>

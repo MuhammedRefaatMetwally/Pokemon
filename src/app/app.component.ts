@@ -10,7 +10,6 @@ import { CommonModule, UpperCasePipe } from '@angular/common';
     RouterOutlet,
     CommonModule,
     RouterModule,
-    NavbarComponent
 ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CartService } from '../../services/cart.services';
+import { CartService } from '../../services/cart.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -13,10 +14,13 @@ export class ProfileComponent implements OnInit {
   currentUser: any;
    purchasedItems: any[] = [];
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService , private router: Router) {}
 
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+  }
+  goHome(): void {
+    this.router.navigate(['pokemon']);
   }
 
 
