@@ -1,0 +1,57 @@
+.checkout-container {
+  .card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .card-header {
+    border-radius: 10px 10px 0 0;
+  }
+
+  .cart-item {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .order-summary {
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+
+    .summary-total {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.1rem;
+    }
+  }
+
+  .pokeball-animation {
+    animation: bounce 1.5s infinite;
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+  }
+
+  .btn-success {
+    background-color: #28a745;
+    border: none;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #218838;
+    }
+  }
+}

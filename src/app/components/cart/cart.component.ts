@@ -77,30 +77,30 @@ export class PokemonCartComponent implements OnInit, OnDestroy {
   }
 
 checkout(): void {
-  let currentUser = JSON.parse(localStorage.getItem('loggedInUser') || 'null');
-  let newOrder = {
-    cart: this.cartItems2,
-    totalItems: this.totalItems,
-    total: this.total,
-    status: 'Placed',
-    date: new Date(),
-  };
+  // let currentUser = JSON.parse(localStorage.getItem('loggedInUser') || 'null');
+  // let newOrder = {
+  //   cart: this.cartItems2,
+  //   totalItems: this.totalItems,
+  //   total: this.total,
+  //   status: 'Placed',
+  //   date: new Date(),
+  // };
 
-  if (!currentUser.orders) {
-    currentUser.orders = [];
-  }
+  // if (!currentUser.orders) {
+  //   currentUser.orders = [];
+  // }
 
-  currentUser.orders.push(newOrder);
+  // currentUser.orders.push(newOrder);
 
-  localStorage.setItem('loggedInUser', JSON.stringify(currentUser));
+  // localStorage.setItem('loggedInUser', JSON.stringify(currentUser));
 
-  let users = JSON.parse(localStorage.getItem('users') || '[]');
-  let updatedUsers = users.map((user: any) =>
-    user.email === currentUser.email ? currentUser : user
-  );
-  localStorage.setItem('users', JSON.stringify(updatedUsers));
+  // let users = JSON.parse(localStorage.getItem('users') || '[]');
+  // let updatedUsers = users.map((user: any) =>
+  //   user.email === currentUser.email ? currentUser : user
+  // );
+  // localStorage.setItem('users', JSON.stringify(updatedUsers));
 
-  this.clearCart();
+  // this.clearCart();
 
    this.router.navigate(['/checkout']);
 }

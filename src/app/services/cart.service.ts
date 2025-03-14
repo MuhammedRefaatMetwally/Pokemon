@@ -22,4 +22,7 @@ export class CartService {
 
     localStorage.setItem(this.storageKey, JSON.stringify(cart));
   }
+  clearCart(): void {
+    localStorage.setItem(this.storageKey, JSON.stringify([]));
+  }
 }
