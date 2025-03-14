@@ -10,13 +10,19 @@ import { CartService } from '../../services/cart.services';
   styleUrl:'./profile.component.css'
 })
 export class ProfileComponent implements OnInit {
-  currentUser: any;
-   purchasedItems: any[] = [];
+  currentUser: any = null;
+  orders: any[] = [];
 
   constructor(private cartService: CartService) {}
 
-  ngOnInit() {
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+  ngOnInit(): void {
+    this.currentUser = JSON.parse(
+      localStorage.getItem('currentUser') || 'null'
+    );
+
+    if (this.currentUser && this.currentUser.orders) {
+      this.orders = this.currentUser.orders;
+    }
   }
 
 
