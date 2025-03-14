@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = JSON.parse(
-      localStorage.getItem('currentUser') || 'null'
+      localStorage.getItem('loggedInUser') || 'null'
     );
 
     if (this.currentUser && this.currentUser.orders) {

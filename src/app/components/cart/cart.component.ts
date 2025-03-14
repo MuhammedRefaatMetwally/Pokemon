@@ -77,7 +77,7 @@ export class PokemonCartComponent implements OnInit, OnDestroy {
   }
 
 checkout(): void {
-  let currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+  let currentUser = JSON.parse(localStorage.getItem('loggedInUser') || 'null');
   let newOrder = {
     cart: this.cartItems2,
     totalItems: this.totalItems,
@@ -92,7 +92,7 @@ checkout(): void {
 
   currentUser.orders.push(newOrder);
 
-  localStorage.setItem('currentUser', JSON.stringify(currentUser));
+  localStorage.setItem('loggedInUser', JSON.stringify(currentUser));
 
   let users = JSON.parse(localStorage.getItem('users') || '[]');
   let updatedUsers = users.map((user: any) =>

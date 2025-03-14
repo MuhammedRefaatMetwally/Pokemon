@@ -29,7 +29,7 @@ export class NavbarComponent {
         localStorage.setItem('users', JSON.stringify(users));
       }
     }
-    // localStorage.removeItem('cart');
+    localStorage.removeItem('cart');
     localStorage.removeItem('loggedInUser');
     this.router.navigate(['login']);
   }
