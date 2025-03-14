@@ -3,6 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CartService } from '../../services/cart.service';
 import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 
 interface CartItem {
   id: number;
@@ -28,8 +29,7 @@ export class PokemonCartComponent implements OnInit, OnDestroy {
   tax: number = 0;
   total: number = 0;
 
-  constructor(private cartService: CartService) {}
-
+  constructor(private cartService: CartService, private router: Router) {}
   ngOnInit(): void {
     this.cartItems2 = this.cartService.getCart();
     this.calculateCartTotals();
@@ -76,36 +76,33 @@ export class PokemonCartComponent implements OnInit, OnDestroy {
     localStorage.setItem('cart', JSON.stringify(this.cartItems2));
   }
 
- checkout(): void {
-     let currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+checkout(): void {
+  let currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+  let newOrder = {
+    cart: this.cartItems2,
+    totalItems: this.totalItems,
+    total: this.total,
+    status: 'Placed',
+    date: new Date(),
+  };
 
-    if (!currentUser) {
-      alert('Please log in to complete the purchase.');
-      return;
-    }
-
-     let newOrder = {
-      cart: this.cartItems2,
-      totalItems: this.totalItems,
-      total: this.total,
-      status: 'Placed',
-      date: new Date(),
-    };
-
-     if (!currentUser.orders) {
-      currentUser.orders = [];
-    }
-
-     currentUser.orders.push(newOrder);
-
-     localStorage.setItem('currentUser', JSON.stringify(currentUser));
-
-     let users = JSON.parse(localStorage.getItem('users') || '[]');
-    let updatedUsers = users.map((user: any) =>
-      user.email === currentUser.email ? currentUser : user
-    );
-    localStorage.setItem('users', JSON.stringify(updatedUsers));
-
-     this.clearCart();
+  if (!currentUser.orders) {
+    currentUser.orders = [];
   }
+
+  currentUser.orders.push(newOrder);
+
+  localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
+  let users = JSON.parse(localStorage.getItem('users') || '[]');
+  let updatedUsers = users.map((user: any) =>
+    user.email === currentUser.email ? currentUser : user
+  );
+  localStorage.setItem('users', JSON.stringify(updatedUsers));
+
+  this.clearCart();
+
+   this.router.navigate(['/checkout']);
+}
+
 }
