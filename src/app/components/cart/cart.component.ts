@@ -76,36 +76,39 @@ export class PokemonCartComponent implements OnInit, OnDestroy {
     localStorage.setItem('cart', JSON.stringify(this.cartItems2));
   }
 
- checkout(): void {
-     let currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+checkout(): void {
+  let currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
 
-    if (!currentUser) {
-      alert('Please log in to complete the purchase.');
-      return;
-    }
-
-     let newOrder = {
-      cart: this.cartItems2,
-      totalItems: this.totalItems,
-      total: this.total,
-      status: 'Placed',
-      date: new Date(),
-    };
-
-     if (!currentUser.orders) {
-      currentUser.orders = [];
-    }
-
-     currentUser.orders.push(newOrder);
-
-     localStorage.setItem('currentUser', JSON.stringify(currentUser));
-
-     let users = JSON.parse(localStorage.getItem('users') || '[]');
-    let updatedUsers = users.map((user: any) =>
-      user.email === currentUser.email ? currentUser : user
-    );
-    localStorage.setItem('users', JSON.stringify(updatedUsers));
-
-     this.clearCart();
+  if (!currentUser) {
+    alert('Please log in to complete the purchase.');
+    return;
   }
+
+  let newOrder = {
+    cart: this.cartItems2,
+    totalItems: this.totalItems,
+    total: this.total,
+    status: 'Placed',
+    date: new Date(),
+  };
+
+  if (!currentUser.orders) {
+    currentUser.orders = [];
+  }
+
+  currentUser.orders.push(newOrder);
+
+  localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
+  let users = JSON.parse(localStorage.getItem('users') || '[]');
+  let updatedUsers = users.map((user: any) =>
+    user.email === currentUser.email ? currentUser : user
+  );
+  localStorage.setItem('users', JSON.stringify(updatedUsers));
+
+  this.clearCart();
+
+   this.router.navigate(['/checkout']);
+}
+
 }
