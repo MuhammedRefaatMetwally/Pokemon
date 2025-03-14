@@ -3,6 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CartService } from '../../services/cart.service';
 import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 
 interface CartItem {
   id: number;
@@ -28,8 +29,7 @@ export class PokemonCartComponent implements OnInit, OnDestroy {
   tax: number = 0;
   total: number = 0;
 
-  constructor(private cartService: CartService) {}
-
+  constructor(private cartService: CartService, private router: Router) {}
   ngOnInit(): void {
     this.cartItems2 = this.cartService.getCart();
     this.calculateCartTotals();
